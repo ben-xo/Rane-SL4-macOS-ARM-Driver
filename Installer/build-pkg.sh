@@ -16,7 +16,7 @@
 # Rane's own SL 4 driver: its kext, System Settings pane and settings daemon).
 set -euo pipefail
 ROOT=$(cd "$(dirname "$0")/.." && pwd)
-DEFAULT_VER=$(tr -d '[:space:]' < "$ROOT/VERSION" 2>/dev/null || echo "1.4.0")
+DEFAULT_VER=$(tr -d '[:space:]' < "$ROOT/VERSION" 2>/dev/null || echo "1.3.0")
 VERSION=${1:-$DEFAULT_VER}
 PKGSRC="$ROOT/Installer/package"
 OUT="$ROOT/build"
@@ -71,6 +71,7 @@ pkgbuild --root "$STAGE" --component-plist "$WORK/components.plist" --scripts "$
 # The product package, with the installer's pages, and its background drawn from the control panel's icon.
 sed "s/@VERSION@/$VERSION/" "$PKGSRC/Distribution.xml" > "$WORK/Distribution.xml"
 cp -R "$PKGSRC/resources" "$WORK/resources"
+for f in "$WORK"/resources/*.lproj/*.html; do sed -i '' "s/@VERSION@/$VERSION/g" "$f"; done
 swiftc -O tools/controlpanel/make-icon.swift -o "$WORK/make-icon"
 "$WORK/make-icon" --installer-background "$WORK/resources/background.png"
 mkdir -p "$OUT"
