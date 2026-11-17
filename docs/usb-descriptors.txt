@@ -1,0 +1,73 @@
+Rane SL 4 USB descriptors, decoded from the FX2 firmware image in Rane's SL4 driver 2.0.1f1 (firmware
+1.02). Not yet read from a box with lsusb / ioreg: to confirm on hardware.
+Addresses are FX2 CODE addresses; 'file' offsets are in the decrypted 0x1B040-byte update image.
+
+Device Descriptor  (FX2 0x0a00, file 0x19b81)                       [read]
+  bLength 18  bDescriptorType 1  bcdUSB 2.00
+  bDeviceClass 0  bDeviceSubClass 255  bDeviceProtocol 255  bMaxPacketSize0 64
+  idVendor 0x1cc5  idProduct 0x000f  bcdDevice 1.00
+  iManufacturer 1  iProduct 2  iSerial 3  bNumConfigurations 1
+Device Descriptor  (FX2 0x0a12, file 0x19b93)  -- used after HID 0x1A  [read]
+  ... identical except idProduct 0x0010
+Device Qualifier (FX2 0x0a24, file 0x19ba5): bcdUSB 2.00 class 0 sub 255 proto 255
+  bMaxPacketSize0 64 bNumConfigurations 1
+High-speed Configuration Descriptor  (FX2 0x0a2e, file 0x19baf)
+  Configuration: wTotalLength 0x00eb bNumInterfaces 4 bConfigurationValue 1 iConfiguration 0
+                 bmAttributes 0x80 (bus powered) MaxPower 500mA
+  Interface 0 alt 0: 0 EPs, class 0xff subclass 0x01 protocol 0x20 iInterface 4 "SL 4 Audio"
+    CS AC Header:        bcdADC 2.00 bCategory 0x0a wTotalLength 75 bmControls 0x00   [09 24 01 00 02 0a 4b 00 00]
+    CS Clock Source:     bClockID 5 bmAttributes 0x01 (internal fixed) bmControls 0x01 (freq read-only)
+                                                                              [08 24 0a 05 01 01 00 00]
+    CS Input Terminal:   ID 1 type 0x0101 (USB streaming) clock 5 bNrChannels 10 bmChannelConfig 0
+                         iChannelNames 5   [11 24 02 01 01 01 00 05 0a 00 00 00 00 05 00 00 00]
+    CS Output Terminal:  ID 2 type 0x0602 (digital audio interface) source 1 clock 5
+                                           [0c 24 03 02 02 06 00 01 05 00 00 00]
+    CS Input Terminal:   ID 3 type 0x0602 clock 5 bNrChannels 10 iChannelNames 15
+                                           [11 24 02 03 02 06 00 05 0a 00 00 00 00 0f 00 00 00]
+    CS Output Terminal:  ID 4 type 0x0101 (USB streaming) source 3 clock 5
+                                           [0c 24 03 04 01 01 00 03 05 00 00 00]
+  Interface 1 alt 0: 0 EPs, class 0xff subclass 0x02 protocol 0x20
+  Interface 1 alt 1: 1 EP,  class 0xff subclass 0x02 protocol 0x20
+    CS AS General: bTerminalLink 1 bFormatType 1 bmFormats 0x00000001 (PCM) bNrChannels 10
+                   bmChannelConfig 0 iChannelNames 5   [10 24 01 01 00 01 01 00 00 00 0a 00 00 00 00 05]
+    CS AS Format Type I: bSubslotSize 4 bBitResolution 24   [06 24 02 01 04 18]
+    Endpoint Descriptor:
+      bEndpointAddress     0x06  EP 6 OUT
+      bmAttributes            5
+        Transfer Type            Isochronous
+        Synch Type               Asynchronous
+        Usage Type               Data
+      wMaxPacketSize     0x0208  1x 520 bytes
+      bInterval               1
+    CS AS Endpoint: [08 25 01 00 00 00 00 00]  (no pitch/lock-delay)
+  Interface 2 alt 0: 0 EPs, class 0xff subclass 0x02 protocol 0x20
+  Interface 2 alt 1: 1 EP,  class 0xff subclass 0x02 protocol 0x20
+    CS AS General: bTerminalLink 3 bFormatType 1 bmFormats 0x00000001 bNrChannels 10
+                   iChannelNames 15     [10 24 01 03 00 01 01 00 00 00 0a 00 00 00 00 0f]
+                   (links the input terminal, not output terminal 4: same harmless bug as the SL 3)
+    CS AS Format Type I: bSubslotSize 4 bBitResolution 24   [06 24 02 01 04 18]
+    Endpoint Descriptor:
+      bEndpointAddress     0x82  EP 2 IN
+      bmAttributes           37 (0x25)
+        Transfer Type            Isochronous
+        Synch Type               Asynchronous
+        Usage Type               Implicit feedback Data
+      wMaxPacketSize     0x0208  1x 520 bytes
+      bInterval               1
+    CS AS Endpoint: [08 25 01 00 00 00 00 00]
+  Interface 3 alt 0: 2 EPs, class 0x03 (HID) subclass 0 protocol 0
+    HID: bcdHID 1.10 country 0 numDesc 1 type 0x22 wDescriptorLength 28
+    Endpoint 0x81 EP 1 IN  Interrupt  wMaxPacketSize 64 bInterval 1
+    Endpoint 0x01 EP 1 OUT Interrupt  wMaxPacketSize 64 bInterval 1
+Full-speed Configuration Descriptor  (FX2 0x0b1a, file 0x19c9b)
+  Configuration: wTotalLength 0x0029 bNumInterfaces 1 bConfigurationValue 1 bmAttributes 0x80 MaxPower 500mA
+  Interface 0 alt 0: 2 EPs, class 0x03 (HID)
+    HID: bcdHID 1.10 type 0x22 wDescriptorLength 28
+    Endpoint 0x81 EP 1 IN  Interrupt 64 bInterval 1
+    Endpoint 0x01 EP 1 OUT Interrupt 64 bInterval 1
+HID Report Descriptor (FX2 0x0b44, file 0x19cc5, 28 bytes):
+  06 00 ff 09 01 a1 01 19 01 29 02 15 00 25 01 75 08 95 40 81 02 19 01 29 02 91 02 c0
+  (vendor page 0xFF00, one 64-byte input report and one 64-byte output report, no report IDs)
+Strings (FX2 0x0b60.., file 0x19ce1..), UTF-16LE:                     [read]
+  0: LANGID 0x0409   1: "Rane Corporation"   2: "Rane SL 4"   3: "RH.01.00" (serial, a constant)
+  4: "SL 4 Audio"    5..14: "CH1 Out".."CH10 Out"   15..24: "CH1 In".."CH10 In"
