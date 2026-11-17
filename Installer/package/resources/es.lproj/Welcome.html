@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<style>
+  body { font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif; font-size: 13px; line-height: 1.5; margin: 12px 16px; }
+  .header { display: flex; align-items: center; margin-bottom: 14px; }
+  h1 { font-size: 20px; margin: 0 0 4px 0; font-weight: 700; }
+  .sub { font-size: 13px; opacity: 0.85; margin: 0; }
+  .credits { border-left: 4px solid #ffd600; padding: 10px 14px; margin: 14px 0; border-radius: 6px; background: rgba(255, 214, 0, 0.12); }
+  a { color: #007aff; text-decoration: none; font-weight: 600; }
+  @media (prefers-color-scheme: dark) {
+    body { color: #f5f5f7; }
+    a { color: #ffd600; }
+  }
+  ul { padding-left: 20px; margin: 8px 0; }
+  li { margin-bottom: 5px; }
+</style>
+</head>
+<body>
+  <div class="header">
+    <div>
+      <h1>Rane SL 4 CoreAudio Driver</h1>
+      <p class="sub">Versión @VERSION@ &bull; Nativo para Apple Silicon (M1 / M2 / M3 / M4) &amp; Intel</p>
+    </div>
+  </div>
+  <div class="credits">
+    <strong>Idea original y proyecto por:</strong> pepelee (PPLEE)<br/>
+    <strong>Instagram:</strong> <a href="https://www.instagram.com/pepeleedj/">@pepeleedj</a> &mdash; <code>instagram.com/pepeleedj/</code>
+  </div>
+  <p>Este instalador configurará en tu Mac el driver de baja latencia para la tarjeta de sonido <strong>Rane SL 4</strong>:</p>
+  <ul>
+    <li><strong>10 Entradas y 10 Salidas</strong> (Decks 1-4 y Aux) a 24-bit / 48 o 96 kHz, con motor de audio de baja latencia. La frecuencia de muestreo se elige en la propia SL 4, con su control de 48/96 kHz, y el driver la sigue. El orden de los canales (1-2 Deck 1 &hellip; 7-8 Deck 4, 9-10 Aux) aún no se ha comprobado en una SL 4.</li>
+    <li><strong>Conmutación automática USB / Thru</strong> de los decks 1-4 al abrir y cerrar tu software de audio (Ableton Live, Traktor, Mixxx, Serato, Logic Pro, etc.).</li>
+    <li><strong>App SL 4 Control Panel</strong> (en Aplicaciones) y utilidad <code>sl4panel</code>: Thru en cada plato, volumen de salida y niveles, y la frecuencia de muestreo y el puerto USB de la caja. (La SL 4 no informa de sus selectores Phono/Line, así que no se muestran.)</li>
+    <li><strong>Serato DJ Pro 2.5.5</strong>: incluye <code>SL4Api.framework</code> (modos DVS ABS / REL / INT y THRU).</li>
+    <li><strong>Activación inmediata:</strong> No requiere reiniciar el ordenador ni desactivar la seguridad del sistema (SIP).</li>
+  </ul>
+</body>
+</html>

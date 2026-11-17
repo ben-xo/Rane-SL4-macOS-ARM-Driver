@@ -1,0 +1,8 @@
+# Produced locally from the user's own copy of the proprietary driver — never commit.
+# firmware images, and the summary-table backups sl4flash saves
+*.bin
+# extract-sl4-firmware.py default output directory
+sl4-fw-out/
+# python caches
+__pycache__/
+*.pyc
