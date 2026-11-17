@@ -197,6 +197,15 @@ firmware or Rane's SL 4 binaries) had, among the SL 2 catalogue's bugs, the foll
    - Test: `sl4flash` (with a box): while it runs, `sl4panel` reports boot mode and the driver's log says
      the box is in its firmware updater.
    - In the commit that rebuilt the driver.
+6. **A second unplug before the stream restarted could put every deck on thru at the next replug.**
+   - Cause: a replug's fallback (thru after 5 s with no stream) still fired when the box was unplugged again
+     before it was due: it cleared the remembered routing with the box away.
+   - Fix: every unplug moves the fallbacks' window on, so a waiting one does nothing; the next replug
+     restores the routing and waits again. From the SL 2 (its entry 59, `c69b7db` there, found by its
+     hardware test).
+   - Test: unplug mid-stream, replug, unplug again within 5 s, replug within 30 s of the first unplug:
+     "Decks routed as before the unplug" after each replug, and one "No stream restarted" line, 5 s after
+     the last.
 
 ## Testing
 
