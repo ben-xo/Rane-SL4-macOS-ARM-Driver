@@ -1,0 +1,17 @@
+# build products (see Makefile)
+/SL4Device
+/SL4Api
+/sl4panel
+/sl4apitest
+/sl4dump
+/sl4flash
+/tools/latency/bin/
+/SL 4 Control Panel.app/
+/build/
+*.o
+*.dSYM/
+.DS_Store
+# sl4flash's backups of the box's table
+sl4-table-backup-*.bin
+# Rane's firmware, as tools/firmware/extract-sl4-firmware.py writes it: never commit it
+sl4_firmware_*.bin
