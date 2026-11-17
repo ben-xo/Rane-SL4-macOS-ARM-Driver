@@ -15,14 +15,18 @@
   * Funciona nativamente con Serato DJ Pro 2.5.5 (ultima version de Serato
     compatible con Rane SL4; versiones posteriores eliminaron el soporte de
     la SL4).
-  * Funciona con el panel oficial "SL 4" en Ajustes del Sistema de macOS.
+  * Incluye la app "SL 4 Control Panel" (en Aplicaciones, macOS 13 o
+    posterior), que sustituye al panel "SL 4" de Ajustes del Sistema.
   * Funciona como tarjeta de sonido de 10 entradas y 10 salidas (24-bit,
-    44.1 / 48 kHz) en Ableton Live, Traktor, Mixxx, Logic Pro, Rekordbox y
+    48 / 96 kHz) en Ableton Live, Traktor, Mixxx, Logic Pro, Rekordbox y
     el audio del sistema de macOS.
 - Arquitectura: Driver CoreAudio en espacio de usuario (HAL Plug-In sobre
   IOUSBHost) + puente nativo SL4Api.framework. NO utiliza extensiones de
   kernel (.kext) activas, por lo que NO requiere desactivar la seguridad
   del Mac (SIP / Reduced Security) ni reiniciar el ordenador.
+- Si estaba instalado el driver original de Rane para la SL4 (su kext, el
+  panel "SL 4 Audio Control Panel" y el servicio SL4SettingsService), el
+  instalador lo elimina: este driver lo sustituye.
 
 
 2. CONTENIDO DE ESTA CARPETA
@@ -31,11 +35,12 @@
                                   y creditos de pepelee (@pepeleedj). Instala
                                   automaticamente el driver CoreAudio, la
                                   libreria SL4Api.framework para Serato DJ
-                                  Pro 2.5.5 y el panel de Ajustes del Sistema.
+                                  Pro 2.5.5, la app SL 4 Control Panel y las
+                                  utilidades sl4panel, sl4dump y sl4flash.
 - Instalar-Rane-SL4.command    -> Instalador automatico en 1 clic (elimina
                                   la cuarentena de Gatekeeper e instala todo).
-- Panel-Control-SL4.command    -> Utilidad en Terminal para ver el estado de
-                                  la Rane SL4.
+- Panel-Control-SL4.command    -> Abre la app SL 4 Control Panel (o muestra
+                                  el estado de la Rane SL4 en Terminal).
 - Desinstalar-Rane-SL4.command -> Elimina el driver y sus componentes si
                                   deseas desinstalarlo.
 
@@ -50,7 +55,7 @@ OPCION A (Recomendada y mas rapida):
    (Si macOS pregunta si deseas abrirlo, haz clic derecho -> Abrir).
 2. Escribe la contrasena de tu Mac cuando la pida en la ventana y pulsa ENTER.
 3. ¡Listo! El motor de audio se recargara solo y la Rane SL4 funcionara al
-   instante en Serato DJ Pro 2.5.5, en Ajustes del Sistema -> SL 4, y en
+   instante en Serato DJ Pro 2.5.5, en la app SL 4 Control Panel, y en
    cualquier software de audio (Ableton Live, Traktor, Logic Pro, etc.).
 
 OPCION B (Con el asistente grafico RaneSL4-macOS-Universal.pkg):
@@ -85,14 +90,28 @@ OPCION B (Con el asistente grafico RaneSL4-macOS-Universal.pkg):
 ------------------------------------------
 - Conexion en caliente: Puedes enchufar y desenchufar la Rane SL4 por USB en
   cualquier momento.
-- Canales de Audio (10 Entradas / 10 Salidas a 24-bit / 44.1 o 48 kHz):
-    * Canales 1 y 2: Left Deck (Plato / CDJ Izquierdo)
-    * Canales 3 y 4: Right Deck (Plato / CDJ Derecho)
-    * Canales 5 y 6: Aux (Entrada / Salida Auxiliar)
-- Panel de Control en Ajustes del Sistema:
-    * En "Ajustes del Sistema" -> "SL 4" (abajo del todo) puedes consultar y
-      cambiar entre Phono / Line, activar o desactivar Thru en cada canal y
-      cambiar la frecuencia de muestreo (44100 Hz / 48000 Hz).
+- Canales de Audio (10 Entradas / 10 Salidas a 24-bit / 48 o 96 kHz):
+    * Canales 1 y 2: Deck 1
+    * Canales 3 y 4: Deck 2
+    * Canales 5 y 6: Deck 3
+    * Canales 7 y 8: Deck 4
+    * Canales 9 y 10: Aux (Entrada / Salida Auxiliar)
+  AVISO: este orden de canales aun no se ha comprobado con una SL4 real.
+- Frecuencia de muestreo: la elige la propia SL4 (48 kHz o 96 kHz, con su
+  control de 48/96 kHz), no el ordenador. El driver la sigue sola: para
+  cambiarla, cambia el control en la SL4. No se puede cambiar desde
+  Configuracion de Audio MIDI ni desde la app.
+- App SL 4 Control Panel (en Aplicaciones):
+    * Activa o desactiva Thru en cada plato (Decks 1-4; Aux no tiene
+      Thru), muestra la frecuencia de muestreo de la SL4, el puerto USB de
+      la SL4 al que esta conectado este Mac, el volumen de salida y
+      medidores de nivel.
+    * La SL4 no informa de la posicion de sus selectores Phono / Line, asi
+      que no se muestran: revisalos en la propia SL4.
+- Volumen de salida: la SL4 no tiene control de volumen propio, asi que lo
+  aporta el driver (barra de menus, teclas de volumen y Configuracion de
+  Audio MIDI). Afecta a todo lo que suena por la SL4, incluidos los platos
+  de Serato: si suenan bajos, revisa el volumen de la SL4.
 
 ========================================================================
   Creditos: Idea original y proyecto por pepelee (PPLEE)

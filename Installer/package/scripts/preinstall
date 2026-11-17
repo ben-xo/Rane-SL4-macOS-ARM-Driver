@@ -1,0 +1,15 @@
+#!/bin/sh
+# Remove the previous driver (it is replaced whole), and Rane's own SL 4 driver if it is installed:
+# its kext (Serato DJ Pro 2.5.5 only checks the path, where this package puts an empty one; Rane's
+# would also claim the box on an Intel Mac), its "SL 4 Audio Control Panel" System Settings pane
+# (which an earlier version of this package also installed; the SL 4 Control Panel app replaces it),
+# and its settings daemon, SL4SettingsService, which would keep running against the replacement SL4Api.
+rm -rf "/Library/Audio/Plug-Ins/HAL/SL4Device.driver"
+kmutil unload -b com.rane.driver.sl4 >/dev/null 2>&1 || kextunload -b com.rane.driver.sl4 >/dev/null 2>&1 || true
+rm -rf "/Library/Extensions/SL4.10.9.kext"
+rm -rf "/Library/PreferencePanes/SL 4 Audio Control Panel.prefPane"
+launchctl bootout system/com.rane.sl4.daemon >/dev/null 2>&1 || launchctl unload /Library/LaunchDaemons/com.rane.sl4.daemon.plist >/dev/null 2>&1 || true
+rm -f "/Library/LaunchDaemons/com.rane.sl4.daemon.plist"
+rm -f "/Library/PrivilegedHelperTools/SL4SettingsService"
+rm -f "/var/root/Library/Preferences/SL4SettingsService.plist"
+exit 0
